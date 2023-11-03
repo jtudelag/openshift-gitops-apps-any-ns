@@ -5,6 +5,7 @@ metadata:
   # Has to be deployed in openshift-gitops to be cluster-scoped, otherwise we need to change ARGOCD_CLUSTER_CONFIG_NAMESPACES.
   namespace: openshift-gitops
 spec:
+  # Required
   resourceTrackingMethod: annotation
   extraConfig:
     #Add any ns you want your Appications to be managed by this ArgoCD instance
