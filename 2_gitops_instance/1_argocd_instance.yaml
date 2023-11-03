@@ -9,7 +9,8 @@ spec:
   resourceTrackingMethod: annotation
   extraConfig:
     #Add any ns you want your Appications to be managed by this ArgoCD instance
-    application.namespaces: myapps-*
+    #application.namespaces: myapps-*
+    application.namespaces: myapps-acme
   applicationSet:
     resources:
       limits:

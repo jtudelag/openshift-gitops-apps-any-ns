@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: myapps-acme
+  namespace: openshift-gitops
+spec:
+  sourceNamespaces:
+  - myapps-acme
+  sourceRepos:
+  - '*'
+  destinations:
+  - namespace: 'hello-openshift'
+    server: '*'
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
