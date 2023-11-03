@@ -54,5 +54,24 @@ but I am probably missing sth and there is a good explanation for it.
 
 ## OpenShift GitOps Operator ignores wildcards in sourceNamespaces
 
-Altough [ArgoCD upstream supports it](https://argo-cd.readthedocs.io/en/stable/operator-manual/app-any-namespace/#change-workload-startup-parameters) there is an issue for
+Altough [ArgoCD upstream supports it](https://argo-cd.readthedocs.io/en/stable/operator-manual/app-any-namespace/#change-workload-startup-parameters), there is an issue for
 [OpenShift GitOps open](https://issues.redhat.com/browse/RFE-4535).
+
+## Bug?: ArgoCD instance crashes if the source namespaces dont exist
+
+If any of the namespaces in the ArgoCD instance `spec.sourceNamespaces` do not
+exist in dvance, the ArgoCD instance can not be deployed, and it happens
+because the OpenShift GitOps Operator controller pod crashes....
+
+```
+$ oc -n openshift-gitops-operator logs openshift-gitops-operator-controller-manager-7846dd9fc7-wxmtn
+
+2023-11-03T21:27:38Z    ERROR   Reconciler error        {"controller": "argocd", "controllerGroup": "argoproj.io", "controllerKind": "ArgoCD", "ArgoCD": {"name":"argo-app-any-ns","namespace"
+:"app-gitops"}, "namespace": "app-gitops", "name": "argo-app-any-ns", "reconcileID": "8bcc2154-8e33-4fcb-bd24-05b7be47fd4f", "error": "Namespace \"myapps-acme\" not found"}
+sigs.k8s.io/controller-runtime/pkg/internal/controller.(*Controller).reconcileHandler
+        /remote-source/deps/gomod/pkg/mod/sigs.k8s.io/controller-runtime@v0.16.3/pkg/internal/controller/controller.go:329
+sigs.k8s.io/controller-runtime/pkg/internal/controller.(*Controller).processNextWorkItem
+        /remote-source/deps/gomod/pkg/mod/sigs.k8s.io/controller-runtime@v0.16.3/pkg/internal/controller/controller.go:266
+sigs.k8s.io/controller-runtime/pkg/internal/controller.(*Controller).Start.func2.2
+        /remote-source/deps/gomod/pkg/mod/sigs.k8s.io/controller-runtime@v0.16.3/pkg/internal/controller/controller.go:227
+```
