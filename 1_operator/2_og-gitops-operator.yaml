@@ -1,7 +1,6 @@
 apiVersion: operators.coreos.com/v1
 kind: OperatorGroup
 metadata:
-  annotations:
   generateName: openshift-gitops-operator-
   name: openshift-gitops-operator-kvlxm
   namespace: openshift-gitops-operator
