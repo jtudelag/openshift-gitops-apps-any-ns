@@ -1,5 +1,16 @@
 # openshift-gitops-apps-any-ns
-Apps in any Namespace with OpenShift GitOps Operator
+Apps in any Namespace with OpenShift GitOps Operator.
+
+Current status: Not working, this is just a WIP.
+
+- ArgoCD console does not show the app when is created inside the myapps-acme
+  Namespace.
+- Application not synced.
+```bash
+oc get application -n myapps-acme
+NAME          SYNC STATUS   HEALTH STATUS
+test-any-ns
+```
 
 
 # Known errors
