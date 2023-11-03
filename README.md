@@ -1,7 +1,7 @@
 # openshift-gitops-apps-any-ns
 Apps in any Namespace with OpenShift GitOps Operator.
 
-This is tech preview sinc 1.7, but is not documented...only briefly mentioned
+This is tech preview since 1.7, but is not documented...only briefly mentioned
 in the [release note](https://docs.openshift.com/container-platform/4.10/cicd/gitops/gitops-release-notes.html#gitops-release-notes-1-7-0_gitops-release-notes).
 
 ``````
@@ -18,23 +18,23 @@ With this update, you can create applications, which are managed by the same con
 means  setting the env var `ARGOCD_CLUSTER_CONFIG_NAMESPACES` as described in this [article](https://developers.redhat.com/articles/2023/03/06/5-global-environment-variables-provided-openshift-gitops#5_environment_variables__details).
 
 * Swith ArgoCD to [resource tracking](https://argo-cd.readthedocs.io/en/stable/operator-manual/app-any-namespace/#switch-resource-tracking-method). This is not documented
-for OpenShift GitOps neither...It has to be set in the ArgoCD CR `spec.resourceTrackingMethod: annotation`,
+for OpenShift GitOps neither...It has to be set in the ArgoCD CR `spec.resourceTrackingMethod: annotation`.
 
 # Known Issues
 
 ## OpenShift users can NOT see clusters or projects
 
-When logged in the ArgoCD instance using the OpenShift logging,
+When logged in the ArgoCD instance using the OpenShift login,
 with a cluster-admin user, I cant see anything in the UI, nor clusters
 nor projects.
 
-Due to one or both reasons:
+I guess due to any of these reasons (or both):
 
   * Default ArgoCD instace permissions [narrowing since version 1.10](https://issues.redhat.com/browse/GITOPS-3032).
   * My user does not belonging to the [cluster-admin group](https://docs.openshift.com/gitops/1.10/accesscontrol_usermanagement/configuring-sso-on-argo-cd-using-dex.html#gitops-dex-role-mappings_configuring-sso-for-argo-cd-using-dex).
 
 ## Not enough permissions to deploy inside hello-openshift
-Apparently the ArgoCD instance inside openshift-gitops does not have
+Apparently my ArgoCD instance (deployed outside openshift-gitops namespace) does not have
 enough permissions inside the hello-openshift ns:
 
 ```
@@ -49,7 +49,7 @@ oc -n hello-openshift adm policy add-role-to-user cluster-admin system:serviceac
 Or applying the role binding `4_hello-openshift-rb.yaml` inside the
 `3_argocd_app` folder.
 
-I would expect a cluster scoped ArgoCD to be able to create a Deployment on a Namespace,
+I would expect a cluster scoped ArgoCD to be able to create a Deployment on any namespace,
 but I am probably missing sth and there is a good explanation for it.
 
 ## OpenShift GitOps Operator ignores wildcards in sourceNamespaces
