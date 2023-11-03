@@ -10,4 +10,4 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: argo-app-any-ns-argocd-application-controller
-  namespace: openshift-gitops
+  namespace: app-gitops
