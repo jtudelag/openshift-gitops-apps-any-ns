@@ -2,15 +2,13 @@ apiVersion: argoproj.io/v1beta1
 kind: ArgoCD
 metadata:
   name: argo-app-any-ns
-  # Has to be deployed in openshift-gitops to be cluster-scoped, otherwise we need to change ARGOCD_CLUSTER_CONFIG_NAMESPACES.
-  namespace: openshift-gitops
+  namespace: app-gitops
 spec:
   # Required
   resourceTrackingMethod: annotation
-  extraConfig:
-    #Add any ns you want your Appications to be managed by this ArgoCD instance
-    #application.namespaces: myapps-*
-    application.namespaces: myapps-acme
+  # Per 1.7 release notes....https://docs.openshift.com/container-platform/4.10/cicd/gitops/gitops-release-notes.html#gitops-release-notes-1-7-0_gitops-release-notes
+  sourceNamespaces:
+  - myapps-acme
   applicationSet:
     resources:
       limits:
