@@ -60,7 +60,7 @@ Altough [ArgoCD upstream supports it](https://argo-cd.readthedocs.io/en/stable/o
 ## Bug?: ArgoCD instance crashes if the source namespaces dont exist
 
 If any of the namespaces in the ArgoCD instance `spec.sourceNamespaces` do not
-exist in dvance, the ArgoCD instance can not be deployed, and it happens
+exist in advance, the ArgoCD instance can not be deployed, and it happens
 because the OpenShift GitOps Operator controller pod crashes....
 
 ```
