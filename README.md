@@ -12,8 +12,15 @@ NAME          SYNC STATUS   HEALTH STATUS
 test-any-ns
 ```
 
-
 # Known errors
+
+## OpenShift users can see clusters or projects
+
+When logged in the ArgoCD instance using the OpenShift logging,
+with a cluster-admin user, I cant see anything in the UI, nor clusters
+nor projects.
+
+I have to login usen the local `admin` user of ArgoCD.
 
 ## Not enough permissions to deploy inside hello-openshift
 Apparently the ArgoCD instance inside openshift-gitops does not have
