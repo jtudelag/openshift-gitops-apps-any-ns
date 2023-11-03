@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: test-any-ns
+  # In openshift-gitops it works
+  #namespace: openshift-gitops
+  namespace: myapps-acme
+spec:
+  destination:
+    namespace: hello-openshift
+    server: https://kubernetes.default.svc
+  project: myapps-acme
+  source:
+    path: hello-openshift
+    repoURL: https://github.com/jtudelag/openshift-gitops-apps-any-ns.git
+    targetRevision: HEAD
+  syncPolicy:
+    automated: {}
+    syncOptions:
+    - CreateNamespace=true
