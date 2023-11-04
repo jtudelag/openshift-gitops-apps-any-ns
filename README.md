@@ -12,8 +12,36 @@ With this update, you can create applications, which are managed by the same con
 * Add the namespace to the .spec.sourceNamespaces attribute in the AppProject custom resource that is associated with the application.
 ``````
 
+The ArgoCD CR `spec.sourceNamespaces` is propagated to the ArgoCD server and application
+controller Deployments with the parameter `--application-namespace`, as mentioned by
+the [ArgoCD upstream docs](https://argo-cd.readthedocs.io/en/stable/operator-manual/app-any-namespace/#change-workload-startup-parameters). On the contrary, this does not happen with the applications set
+controller.
+
+Application controller deployment:
+```yaml
+containers:
+    - command:
+      - argocd-application-controller
+      ...
+      ...
+      - --application-namespaces
+      - myapps-acme
+```
+
+ArgoCD server:
+```yaml
+containers:
+    - command:
+      - argocd-server
+      ...
+      ...
+      - --application-namespaces
+      - myapps-acme
+```
+
 NOTE: [ArgoCD upstream also documents](https://argo-cd.readthedocs.io/en/stable/operator-manual/app-any-namespace/#change-workload-startup-parameters) the possibility of adding the paremter
-`application.namespaces: ns1, ns2` to the ArgoCD ConfigMap, but OpenShift GitOps ignores it.
+`application.namespaces: ns1, ns2`
+to the ArgoCD ConfigMap, but OpenShift GitOps ignores it.
 
 ## Pre-reqs per upstream docs
 
