@@ -12,6 +12,9 @@ With this update, you can create applications, which are managed by the same con
 * Add the namespace to the .spec.sourceNamespaces attribute in the AppProject custom resource that is associated with the application.
 ``````
 
+NOTE: [ArgoCD upstream also documents](https://argo-cd.readthedocs.io/en/stable/operator-manual/app-any-namespace/#change-workload-startup-parameters) the possibility of adding the paremter
+`application.namespaces: ns1, ns2` to the ArgoCD ConfigMap, but OpenShift GitOps ignores it.
+
 ## Pre-reqs per upstream docs
 
 * ArgoCD must be [cluster scoped](https://argo-cd.readthedocs.io/en/stable/operator-manual/app-any-namespace/#cluster-scoped-argo-cd-installation). For OpenShift GitOps that
