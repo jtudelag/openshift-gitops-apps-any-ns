@@ -9,6 +9,7 @@ spec:
   # Per 1.7 release notes....https://docs.openshift.com/container-platform/4.10/cicd/gitops/gitops-release-notes.html#gitops-release-notes-1-7-0_gitops-release-notes
   sourceNamespaces:
   - myapps-acme
+  kustomizeBuildOptions: '--enable-helm'
   applicationSet:
     resources:
       limits:
